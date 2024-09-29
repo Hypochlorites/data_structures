@@ -9,7 +9,7 @@ class Node {
         Node(std::string, int);
         // Node(std::string, int, Node);
         Node* next;
-        string key;
+        std::string key;
         int value;
 };
 
@@ -22,7 +22,7 @@ class LinkedList {
   public:  
       LinkedList();
       // void append(Node);
-      void append(std::string, key);
+      void append(std::string, int);
       Node* find(std::string);
       
 

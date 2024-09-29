@@ -35,7 +35,6 @@ int main() {
   list.append(key, value);
 
   Node* result = list.find(key);
-  std::cout << result->key << " : " << result-> << std::endl;
+  std::cout << result->key << " : " << result->value << std::endl;
 }
 
-// clang++ ArrayList.cpp HashMap.cpp main.cpp

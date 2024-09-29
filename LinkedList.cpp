@@ -27,7 +27,7 @@ Node* LinkedList::find(std::string key_) {
 
 Node::Node(): next(nullptr) {}
 
-Node::Node(std::string key_, int value_): key(key_), value(value_), next(nullptr) {}
+Node::Node(std::string key_, int value_): next(nullptr), key(key_), value(value_) {}
 
 
 

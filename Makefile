@@ -1,6 +1,6 @@
 all: main
 
-CXX = g++ 
+CXX = g++ -std=c++2a
 
 override CXXFLAGS += -g -Wall -Werror 
 

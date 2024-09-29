@@ -112,7 +112,7 @@ int* ArrayList::allocate(int size) {
 
 std::ostream& operator<<(std::ostream& os,  ArrayList& list) {
     os << "[";
-    for (size_t i = 0; i < list.getLength(); ++i) {
+    for (int i = 0; i < list.getLength(); ++i) {
         os << list.get(i);
         if (i < list.getLength() - 1) {
             os << ", ";

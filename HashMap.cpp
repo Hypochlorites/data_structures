@@ -9,7 +9,7 @@
 
 HashMap::HashMap() : size(32), length(0) {
   array = std::make_unique<ArrayList>(size);
-  for (int i=0; i < size; i++) {
+  for (size_t i=0; i < size; i++) {
     array->append(-1);
   }
 }
