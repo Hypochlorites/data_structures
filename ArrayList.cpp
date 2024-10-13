@@ -2,18 +2,22 @@
 #include "ArrayList.hpp"
 #include <iostream>
 
-ArrayList::ArrayList() {
-    size = 1;
+template<typename T>
+ArrayList<T>::ArrayList() {
+    this->size = 1;
     length = 0;
     array = allocate(size);
 }
-ArrayList::ArrayList(int size) {
+
+template<typename T>
+ArrayList<T>::ArrayList(int size) {
     this->size = size;
     length = 0;
     array = allocate(size);
 }
 
-void ArrayList::validateIndex(int index) {
+template<typename T>
+void ArrayList<T>::validateIndex(int index) {
     if (index < 0)
         throw std::invalid_argument("Index cannot be less than zero. Received: " +       
     std::to_string(index));
@@ -23,46 +27,53 @@ void ArrayList::validateIndex(int index) {
     }
 }
 
-int ArrayList::get(int index) {
+template<typename T>
+T ArrayList<T>::get(int index) {
     validateIndex(index);
     return array[index];
 }
 
-void ArrayList::doubleAndMove() {
-    int* newArray = allocate(size * 2);
+template<typename T>
+void ArrayList<T>::doubleAndMove() {
+    T* newArray = allocate(size * 2);
     copy(array, newArray, 0, size);
     delete [] array;
     array = newArray;
     size = size * 2;
 }
 
-void ArrayList::halfAndMove() {
-    int* newArray = allocate(size / 2);
+template<typename T>
+void ArrayList<T>::halfAndMove() {
+    T* newArray = allocate(size / 2);
     copy(array, newArray, 0, size/2);
     delete[] array;
     array = newArray;
     size = size/2;
 }
 
-void ArrayList::append(int number) {
+template<typename T>
+void ArrayList<T>::append(T element) {
     if (length == size) {
         doubleAndMove();
     }
-    array[length++] = number;
+    array[length++] = element;
 }
 
-void ArrayList::set(int idx, int number) {
+template<typename T>
+void ArrayList<T>::set(int idx, int number) {
     validateIndex(idx);
     array[idx] = number;
 }
 
-void ArrayList::copy(int* from, int* to, int start_idx, int end_idx) {
+template<typename T>
+void ArrayList<T>::copy(T* from, T* to, int start_idx, int end_idx) {
    for (int i = start_idx; i < end_idx; i++) {
       to[i] = from[i];
    }   
 }
 
-int ArrayList::pop() {
+template<typename T>
+T ArrayList<T>::pop() {
     if (length <= 0) {
         throw std::out_of_range("Cannot pop from an empty list");
     }
@@ -72,8 +83,8 @@ int ArrayList::pop() {
     return array[--length];
 }
 
-
-int ArrayList::pop(int idx) {
+template<typename T>
+T ArrayList<T>::pop(int idx) {
     if (idx < 0 || idx >= length) {
         throw std::invalid_argument("Index is out of bounds. Received: " + std::to_string(idx));
     }
@@ -88,7 +99,8 @@ int ArrayList::pop(int idx) {
     return toReturn;
 }
 
-int ArrayList::remove(int value) {
+template<typename T>
+T ArrayList<T>::remove(int value) {
     for (int i = 0; i < length; i++) {
         if (array[i] == value) {
             return this->pop(i);
@@ -97,16 +109,19 @@ int ArrayList::remove(int value) {
     throw std::invalid_argument("Value does not exist in array. Received: " + std::to_string(value));
 }
 
-int ArrayList::getSize() {
+template<typename T>
+int ArrayList<T>::getSize() {
     return size;
 }
 
-int ArrayList::getLength() {
+template<typename T>
+int ArrayList<T>::getLength() {
     return length;
 }
 
-int* ArrayList::allocate(int size) {
-    return new int[size];
+template<typename T>
+T* ArrayList<T>::allocate(int size) {
+    return new T[size];
 }
 
 
