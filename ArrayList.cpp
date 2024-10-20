@@ -124,8 +124,8 @@ T* ArrayList<T>::allocate(int size) {
     return new T[size];
 }
 
-
-std::ostream& operator<<(std::ostream& os,  ArrayList& list) {
+template<typename T>
+std::ostream& operator<<(std::ostream& os,  ArrayList<T>& list) {
     os << "[";
     for (int i = 0; i < list.getLength(); ++i) {
         os << list.get(i);

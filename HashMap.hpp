@@ -2,6 +2,7 @@
 #include <string>
 #include "ArrayList.hpp"
 #include <iostream>
+#include "LinkedList.hpp" 
 
 #ifndef HASH_MAP_H
 #define HASH_MAP_H
@@ -15,9 +16,9 @@ class HashMap {
     bool keyExists(std::string);
     int getSize();
     int getLength();
-    ArrayList getArray();
+    ArrayList<LinkedList>& getArray();
     friend std::ostream & operator<<(std::ostream& os, HashMap& map);
-    std::unique_ptr<ArrayList> array;
+    std::unique_ptr<ArrayList<LinkedList>> array;
   private:
     size_t size;
     size_t length;

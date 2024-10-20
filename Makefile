@@ -10,4 +10,3 @@ HEADERS = $(wildcard *.h)
 
 main: $(SRCS) $(HEADERS) 
 	$(CXX) $(CXXFLAGS) $(SRCS) -o "$@"  
-

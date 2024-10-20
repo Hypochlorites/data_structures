@@ -5,22 +5,20 @@
 
 #include "ArrayList.hpp"
 #include "HashMap.hpp"
-
+#include "LinkedList.hpp"
 
 HashMap::HashMap() : size(32), length(0) {
-  array = std::make_unique<ArrayList>(size);
+  array = std::make_unique<ArrayList<LinkedList>>(size);
   for (size_t i=0; i < size; i++) {
-    array->append(-1);
+    array->append(LinkedList());
   }
 }
 
 int HashMap::get(std::string key) {
   int idx = hash(key, size);
-  int to_return = array->get(idx);
-  if (to_return == -1) {
-      throw std::invalid_argument("Key Error: " + key);
-  }
-  return to_return;
+  LinkedList collision_list = array->get(idx);
+  Node* target = collision_list.find(key); 
+  return target->value;
 }
 
 int HashMap::hash(std::string key, size_t table_size) {
@@ -33,7 +31,13 @@ int HashMap::hash(std::string key, size_t table_size) {
 
 void HashMap::add(std::string key, int val) {
     int idx = hash(key, size);
-    array->set(idx, val);
+    LinkedList collision_list = array->get(idx);
+    try {
+      Node* node = collision_list.find(key);
+      node->value = val; 
+    } catch (const std::exception& e) {
+      collision_list.append(key, val); 
+    }
 }
 
 std::ostream& operator<<(std::ostream& os, HashMap& map) {
